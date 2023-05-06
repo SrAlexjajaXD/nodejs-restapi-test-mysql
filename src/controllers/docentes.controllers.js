@@ -30,7 +30,9 @@ export const getDocente = async (req, res) => {
 
 export const createDocente = async (req, res) => {
     const { nombre, usuario, escuela, correo, contra } = req.body
-    //validar que se reciban todos
+    if (nombre == null || usuario == null || escuela == null || correo == null || contra == null) {
+        return res.status(400).json({ msg: "Peticion incorrecta, porfavor llena todos los campos" })
+    }
 
     try {
         
