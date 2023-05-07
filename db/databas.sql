@@ -18,6 +18,7 @@ CREATE TABLE alumnos (
   id_alumno INT NOT NULL AUTO_INCREMENT,
   id_docente INT,
   nombre VARCHAR(80),
+  tipo VARCHAR(45),
   FOREIGN KEY (id_docente) REFERENCES docentes(id_docente),
   PRIMARY KEY (id_alumno)
 );
