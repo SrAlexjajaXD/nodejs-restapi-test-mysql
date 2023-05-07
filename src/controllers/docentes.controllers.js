@@ -29,7 +29,8 @@ export const getDocente = async (req, res) => {
 }
 
 export const createDocente = async (req, res) => {
-    const { id, nombre, usuario, escuela, correo, contra } = req.body
+    const { id, usuario, escuela, correo, contra } = req.body
+    const nombre = req.body.nombre
     try {
         await pool.query('insert into docentes (id_docente, nombre, usuario, escuela, correo, contra) values (?, ?, ?, ?, ?, ?)', [id,nombre, usuario, escuela, correo, contra])
 
