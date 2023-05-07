@@ -29,16 +29,16 @@ export const getDocente = async (req, res) => {
 }
 
 export const createDocente = async (req, res) => {
-    const { nombre, usuario, escuela, correo, contra } = req.body
-    if (nombre == null || usuario == null || escuela == null || correo == null || contra == null) {
+    const { id, nombre, usuario, escuela, correo, contra } = req.body
+    if (id == null || nombre == null || usuario == null || escuela == null || correo == null || contra == null) {
         return res.status(400).json({ msg: "Peticion incorrecta, porfavor llena todos los campos" })
     }
 
     try {
-        const [rows] = await pool.query('insert into docentes (id_docente, nombre, usuario, escuela, correo, contra) values (null, ?, ?, ?, ?, ?)', [nombre, usuario, escuela, correo, contra])
+        await pool.query('insert into docentes (id_docente, nombre, usuario, escuela, correo, contra) values (?, ?, ?, ?, ?, ?)', [id,nombre, usuario, escuela, correo, contra])
 
         res.send({
-            id: rows.insertId,
+            id,
             nombre,
             usuario,
             escuela,
