@@ -39,7 +39,7 @@ export const createDocente = async (req, res) => {
 
 
     try {
-        await pool.query('insert into docentes (id_docente, nombre, usuario, escuela, correo, contra) values (?, ?, ?, ?, ?, ?)', [id_docente,nombre, usuario, escuela, correo, contra])
+        await pool.query('insert into docentes (id_docente, nombre, usuario, escuela, correo, contra) values (null, "FELIX", "felix", "sldkfjs", "safs", "asdfa")')
 
         res.send(req.body)
     } catch (error) {
