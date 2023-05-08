@@ -1,6 +1,8 @@
 import app from "./app.js"
 import { PORT } from "./config.js"
-import cors from 'cors'
+import express from 'express'
+
+app.use(express.json())
 
 app.use(function(req,res,next){
     res.header("Access-Control-Allow-Origin", "*");
