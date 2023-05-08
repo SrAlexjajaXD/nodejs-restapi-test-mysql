@@ -29,7 +29,7 @@ export const getDocente = async (req, res) => {
 }
 
 export const createDocente = async (req, res) => {
-    res.send(req.body)
+    res.json({mensaje: req.body.nombre})  
 
 
     // try {
