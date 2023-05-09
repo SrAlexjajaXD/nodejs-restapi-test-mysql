@@ -33,7 +33,7 @@ export const createAlumno = async (req, res) => {
     try {
         
 
-        const [rows] = await pool.query('insert into alumnos (id_alumno, id_docente, nombre ) values (null, ?, ?)', [ req.body.id_docente, req.body.nombre ])
+        const [rows] = await pool.query('insert into alumnos (id_alumno, id_docente, nombre, tipo ) values (null, ?, ?, ?)', [ req.body.id_docente, req.body.nombre, req.body.tipo ])
 
         res.send({
             id_alumno: rows.insertId,
