@@ -29,18 +29,16 @@ export const getDocente = async (req, res) => {
 }
 
 export const createDocente = async (req, res) => {
-    res.send({mensaje: "sadf"})  
+    try {
+        await pool.query('insert into docentes (id_docente, nombre, usuario, escuela, correo, contra) values (null, ?, ?, ?, ?, ?)', 
+        [req.body.nombre, req.body.usuario, req.body.escuela, req.body.correo, req.body.contra])
 
-
-    // try {
-    //     await pool.query('insert into docentes (id_docente, nombre, usuario, escuela, correo, contra) values (?, ?, ?, ?, ?, ?)', [id_docente,nombre, usuario, escuela, correo, contra])
-
-    //     res.send(req.body)
-    // } catch (error) {
-    //     return res.status(500).json({
-    //         message: "Algo funciono mal"
-    //     })
-    // }
+        res.send(req.body)
+    } catch (error) {
+        return res.status(500).json({
+            message: "Algo funciono mal"
+        })
+    }
 }
 
 export const updateDocente = async (req, res) => {
