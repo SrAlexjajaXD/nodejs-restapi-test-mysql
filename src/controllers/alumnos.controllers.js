@@ -29,15 +29,11 @@ export const getAlumno = async (req, res) => {
 }
 
 export const createAlumno = async (req, res) => {
-    const { id_docente, nombre } = req.body
-    if (nombre == null || id_docente == null ) {
-        return res.status(400).json({ msg: "Peticion incorrecta, porfavor llena todos los campos" })
-    }
 
     try {
         
 
-        const [rows] = await pool.query('insert into alumnos (id_alumno, id_docente, nombre ) values (null, ?, ?)', [ id_docente, nombre ])
+        const [rows] = await pool.query('insert into alumnos (id_alumno, id_docente, nombre ) values (null, ?, ?)', [ req.body.id_docente, req.body.nombre ])
 
         res.send({
             id_alumno: rows.insertId,
