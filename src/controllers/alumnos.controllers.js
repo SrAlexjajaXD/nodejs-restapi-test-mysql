@@ -29,20 +29,14 @@ export const getAlumno = async (req, res) => {
 }
 
 export const createAlumno = async (req, res) => {
-
     try {
-        
+        await pool.query('insert into alumnos (id_alumno, id_docente, nombre, tipo) values (null, ?, ?, ?)', 
+        [ req.body.id_docente, req.body.nombre, req.body.tipo])
 
-        const [rows] = await pool.query('insert into alumnos (id_alumno, id_docente, nombre, tipo ) values (null, ?, ?, ?)', [ req.body.id_docente, req.body.nombre, req.body.tipo ])
-
-        res.send({
-            id_alumno: rows.insertId,
-            id_docente,
-            nombre
-        })
+        res.send(req.body)
     } catch (error) {
         return res.status(500).json({
-            message: error
+            message: "Algo funciono mal"
         })
     }
 }
