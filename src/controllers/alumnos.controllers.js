@@ -28,6 +28,17 @@ export const getAlumno = async (req, res) => {
     }
 }
 
+export const getTipos = async (req, res) => {
+    try {
+        const [rows] = await pool.query('select tipo as name, count(*) as value from alumnos group by tipo')
+        res.json(rows)
+    } catch (error) {
+        return res.status(500).json({
+            message: error
+        })
+    }
+}
+
 export const createAlumno = async (req, res) => {
     try {
         await pool.query('insert into alumnos (id_alumno, id_docente, nombre, tipo) values (null, ?, ?, ?)', 

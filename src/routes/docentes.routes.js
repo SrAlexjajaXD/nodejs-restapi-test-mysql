@@ -1,9 +1,11 @@
 import { Router } from "express";
-import { createDocente, deleteDocente, getDocentes, getDocente, updateDocente } from "../controllers/docentes.controllers.js";
+import { createDocente, deleteDocente, getDocentes, getDocente, updateDocente, getDocenteforLogin } from "../controllers/docentes.controllers.js";
 
 const router = Router()
 
 router.get('/docentes', getDocentes)
+
+// router.get('/docentes/:correo', getDocenteforLogin)
 
 router.get('/docentes/:id', getDocente)
 
