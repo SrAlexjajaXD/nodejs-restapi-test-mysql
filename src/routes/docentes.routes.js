@@ -5,7 +5,7 @@ const router = Router()
 
 router.get('/docentes', getDocentes)
 
-// router.get('/docentes/:correo', getDocenteforLogin)
+router.get('/login/docentes/:correo', getDocenteforLogin)
 
 router.get('/docentes/:id', getDocente)
 

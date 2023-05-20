@@ -1,13 +1,15 @@
 import { Router } from "express";
-import { getAlumnos, getAlumno, deleteAlumno, updateAlumno, createAlumno, getTipos } from "../controllers/alumnos.controllers.js";
+import { getAlumnos, getAlumnosProf, getAlumno, deleteAlumno, updateAlumno, createAlumno, getTipos } from "../controllers/alumnos.controllers.js";
 
 const router = Router()
 
 router.get('/alumnos', getAlumnos)
 
-router.get('/alumnos/:id', getAlumno)
+router.get('/alumnos/:id_docente', getAlumnosProf)
 
-router.get('/tipos/alumnos', getTipos)
+router.get('/alumno/:id', getAlumno)
+
+router.get('/tipos/alumnos/:id_docente', getTipos)
 
 router.post('/alumnos', createAlumno)
 

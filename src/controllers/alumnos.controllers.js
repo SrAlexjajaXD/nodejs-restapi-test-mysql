@@ -11,6 +11,17 @@ export const getAlumnos = async (req, res) => {
     }
 }
 
+export const getAlumnosProf = async (req, res) => {
+    try {
+        const [rows] = await pool.query('select * from alumnos where id_docente = ?', [req.params.id_docente])
+        res.json(rows)
+    } catch (error) {
+        return res.status(500).json({
+            message: error
+        })
+    }
+}
+
 export const getAlumno = async (req, res) => {
     try {
         const [rows] = await pool.query('select * from alumnos where id_alumno = ?', [req.params.id])
@@ -30,7 +41,7 @@ export const getAlumno = async (req, res) => {
 
 export const getTipos = async (req, res) => {
     try {
-        const [rows] = await pool.query('select tipo as name, count(*) as value from alumnos group by tipo')
+        const [rows] = await pool.query('select tipo as name, count(*) as value from alumnos where id_docente = ? group by tipo', [req.params.id_docente])
         res.json(rows)
     } catch (error) {
         return res.status(500).json({
