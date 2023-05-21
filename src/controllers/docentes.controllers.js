@@ -60,13 +60,11 @@ export const createDocente = async (req, res) => {
 }
 
 export const updateDocente = async (req, res) => {
-    const { id } = req.params
-    const { nombre, usuario, escuela, correo, contra } = req.body
 
     try {
 
 
-        const [result] = await pool.query('update docentes set nombre = IFNULL(?, nombre), usuario = IFNULL(?,usuario), escuela = IFNULL(?,escuela), correo = IFNULL(?,correo), contra = IFNULL(?,contra) where id_docente = ?', [nombre, usuario, escuela, correo, contra, id])
+        const [result] = await pool.query('update docentes set nombre = IFNULL(?, nombre), usuario = IFNULL(?,usuario), escuela = IFNULL(?,escuela), correo = IFNULL(?,correo), contra = IFNULL(?,contra) where id_docente = ?', [req.body.nombre, req.body.usuario, req.body.escuela, req.body.correo, req.body.contra, req.params.id])
 
         if (result.affectedRows <= 0) {
             return res.status(404).json({
@@ -74,12 +72,12 @@ export const updateDocente = async (req, res) => {
             })
         }
 
-        const [rows] = await pool.query('select * from docentes where id_docente=?', [id])
+        const [rows] = await pool.query('select * from docentes where id_docente=?', [req.params.id])
 
         res.json(rows[0])
     } catch (error) {
-        return res.status(500).json({
-            message: "Algo funciono mal"
+        return res.json({
+            message: error
         })
     }
 }
